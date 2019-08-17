@@ -264,7 +264,12 @@ open class Manager {
         }
         #else
         #if os(iOS) || os(tvOS)
-        UIApplication.shared.open(url)
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+        }
+        else {
+            UIApplication.shared.openURL(url)
+        }
         #elseif os(OSX)
         NSWorkspace.shared.open(url)
         #endif
